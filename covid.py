@@ -1,14 +1,14 @@
 # Autofill Google Form
 import requests
-
+from datetime import date
 
 # URL to the form you want to fill. formResponse should be used instead of viewform
-urlView = 'https://docs.google.com/forms/d/e/1FAIpQLSfyS8JR7COVkiu3T6qbFfefyAmwBx55h0xRgx_wuXyxeXo2YQ/viewform'
-urlRes = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfyS8JR7COVkiu3T6qbFfefyAmwBx55h0xRgx_wuXyxeXo2YQ/formResponse"
+#urlView = 'https://docs.google.com/forms/d/e/1FAIpQLSfyS8JR7COVkiu3T6qbFfefyAmwBx55h0xRgx_wuXyxeXo2YQ/viewform'
+#urlRes = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfyS8JR7COVkiu3T6qbFfefyAmwBx55h0xRgx_wuXyxeXo2YQ/formResponse"
 
 #test urls
-#urlView = "https://docs.google.com/forms/d/e/1FAIpQLSeQPXSFj5Zqe2866YAtiVv14wWKYY1GB9PV6fjnwv85TbFtGw/viewform"
-#urlRes = "https://docs.google.com/forms/d/e/1FAIpQLSeQPXSFj5Zqe2866YAtiVv14wWKYY1GB9PV6fjnwv85TbFtGw/formResponse"
+urlView = "https://docs.google.com/forms/d/e/1FAIpQLSeQPXSFj5Zqe2866YAtiVv14wWKYY1GB9PV6fjnwv85TbFtGw/viewform"
+urlRes = "https://docs.google.com/forms/d/e/1FAIpQLSeQPXSFj5Zqe2866YAtiVv14wWKYY1GB9PV6fjnwv85TbFtGw/formResponse"
 
 def send_covid_screen(id, firstName, lastName, school):
 
@@ -31,7 +31,7 @@ def send_covid_screen(id, firstName, lastName, school):
         "entry.2066453226_sentinel": "",
         "entry.862559759_sentinel": ""
     }
-
+    today = date.today()
     session = requests.Session()
     
     r = session.get(urlView)
@@ -41,9 +41,9 @@ def send_covid_screen(id, firstName, lastName, school):
 
     if r.status_code == requests.codes.ok:
         print(values)
-        print( "Yippi")
+        print( "Yippi ", today)
     else:
-        print("error occured")
+        print("error occured ", today)
 
 
 send_covid_screen("2028020061", "Duncan", "West", "MLS")
